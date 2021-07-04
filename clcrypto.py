@@ -1,4 +1,29 @@
-import random, hashlib, string
+import hashlib
+import random
+import string
+
+
+ALPHABET = string.ascii_uppercase + string.ascii_lowercase + string.digits
+"""
+ALPHABET is a global variable, that keeps all uppercase letter, all lowercase
+letters and digits.
+"""
+
+
+def generate_salt():
+    """
+    Generates a 16-character random salt.
+
+    :rtype: str
+    :return: str with generated salt
+    """
+    salt = ""
+    for i in range(0, 16):
+
+        # get a random element from the iterable
+        salt += random.choice(ALPHABET)
+    return salt
+
 
 def hash_password(password, salt=None):
     """
@@ -66,18 +91,3 @@ def check_password(pass_to_check, hashed):
 
     # compare hashes. If equal, return True
     return new_hash[16:] == hash_to_check
-
-
-def generate_salt():
-    """
-    Generates a 16-character random salt.
-
-    :rtype: str
-    :return: str with generated salt
-    """
-    ALPHABET = string.ascii_lowercase
-    salt = ""
-    for i in range(0, 16):
-        # get a random element from the iterable
-        salt += random.choice(ALPHABET)
-    return salt
